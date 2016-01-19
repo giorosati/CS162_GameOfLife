@@ -13,9 +13,8 @@
 //#include <chrono>
 
 //used on FLIP
-#include <unistd.h>
+//#include <unistd.h>
 #include <stdlib.h>
-
 
 #include "array.hpp"
 
@@ -139,24 +138,22 @@ int main()
 		}
 	}
 
+	//display the initial grid state
 
-		//display the initial grid state
+	//clear screen for windows
+	//system("CLS");
 
-		//clear screen for windows
-		//system("CLS");
+	//clear screen for FLIP
+	system("clear");
 
-		//clear screen for FLIP
-		system("clear");
+	displayVisibleArray(array);
 
-		displayVisibleArray(array);
+	//initial delay for windows
+	//system("pause");
 
-		//initial delay for windows
-		//system("pause");
-
-		//delay for FLIP
-		cout << "Press enter to display the next iteration.";
-		cin.get();
-
+	//delay for FLIP
+	cout << "Press enter to display the next iteration.";
+	cin.get();
 
 	//iterare the game
 	while (cycles != 0, cycles--)
@@ -169,9 +166,7 @@ int main()
 		//	//clear screen for FLIP
 		//	system("clear");
 
-
 		//	displayVisibleArray(array);
-
 
 		//	//initial delay for windows
 		//	//system("pause");
@@ -180,7 +175,6 @@ int main()
 		//	cout << "Press enter to display the next iteration.";
 		//	cin.get();
 		//}
-
 
 		runGame(array, arrayTemp);
 
