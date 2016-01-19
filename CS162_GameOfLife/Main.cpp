@@ -7,13 +7,23 @@
 ** Output:
 *********************************************************************/
 #include <iostream>
-#include <thread>
-#include <chrono>
+
+//used in windows
+//#include <thread>
+//#include <chrono>
+
+//used on FLIP
+#include <unistd.h>
+#include <stdlib.h>
+
+
 #include "array.hpp"
 
 using std::cout;
 using std::cin;
 using std::endl;
+//using std::system("clear");
+
 //using std::this_thread::sleep_for;
 
 int main()
@@ -69,12 +79,12 @@ int main()
 	//cout << "This is the starting arrayTemp" << endl;
 	//system("pause");
 
-	//user input of  x cycles
+	//user entry number of cycles to run
 	double cycles = 0;
-	int speed = 300;
+	int speed = 500;
 	cout << "Please enter the number of cycles to run: " << endl;
 	cin >> cycles;
-	int startValue = cycles;
+	double startValue = cycles;
 
 	//user input of starting location
 	//check to see that it is within the visible bounds
@@ -93,36 +103,108 @@ int main()
 		cin >> col;
 	}
 
-	//populate cells with the oscillator
+	//oscillator test one
+	//populate cells with a one line four cell wide oscillator
 	// this needs to force them enough inside to show the entire starting pattern
 
-	for (int i = row; i < row + 1; i++)		//loop through one line
+	//for (int i = row; i < row + 1; i++)		//loop through one line
+	//{
+	//	for (int j = col; j < col + 3; j++)	//loop through four columns
+	//	{
+	//		array[i + 19][j + 19] = 1;
+	//	}
+	//}
+
+	//oscillator test two
+	//populate cells with a simple two line oscillator
+	// this needs to force them enough inside to show the entire starting pattern
+
+	//for (int i = row; i < row + 1; i++)		//do once
+	//{
+	//	for (int j = col; j < col + 3; j++)	//loop through three columns
+	//	{
+	//		array[i + 19][j + 19] = 1;
+	//		array[i + 20][j + 18] = 1;
+	//	}
+	//}
+
+	//figure eight oscillator test
+	//make two squares
+	for (int i = row; i < row + 3; i++)		//three rows
 	{
-		for (int j = col; j < col + 3; j++)	//loop through four columns
+		for (int j = col; j < col + 3; j++)	//loop through three columns
 		{
-			array[i + 19][j + 19] = 1;
+			array[i + 20][j + 20] = 1;
+			array[i + 23][j + 23] = 1;
 		}
 	}
+
+
+		//display the initial grid state
+
+		//clear screen for windows
+		//system("CLS");
+
+		//clear screen for FLIP
+		system("clear");
+
+		displayVisibleArray(array);
+
+		//initial delay for windows
+		//system("pause");
+
+		//delay for FLIP
+		cout << "Press enter to display the next iteration.";
+		cin.get();
+
 
 	//iterare the game
 	while (cycles != 0, cycles--)
 	{
-		if (startValue = cycles)
-		{
-			system("CLS");
-			displayVisibleArray(array);
-		}
+		//if (startValue = cycles)  //to display the initial grid state
+		//{
+		//	//clear screen for windows
+		//	//system("CLS");
+
+		//	//clear screen for FLIP
+		//	system("clear");
+
+
+		//	displayVisibleArray(array);
+
+
+		//	//initial delay for windows
+		//	//system("pause");
+
+		//	//initial delay for FLIP
+		//	cout << "Press enter to display the next iteration.";
+		//	cin.get();
+		//}
+
 
 		runGame(array, arrayTemp);
 
 		//display arrayTemp
 		displayVisibleArray(arrayTemp);
 
+		//system("pause");
+
 		//tranpose arrayTemp to array
 		swapArray(array, arrayTemp);
 
-		std::this_thread::sleep_for(std::chrono::milliseconds(speed));
-		system("CLS");
+		//delay for windows
+		// std::this_thread::sleep_for(std::chrono::milliseconds(speed));
+
+		//delay options for FLIP
+		//usleep(speed);
+		cout << "Press enter to display the next iteration.";
+		cin.get();
+
+		//clear screen for windows
+		//system("CLS");
+
+		//clear screen for FLIP
+		system("clear");
 
 		//system("pause");
 
