@@ -3,15 +3,11 @@
 ** Author: Giovanni Rosati
 ** email: rosatig@oregonstate.edu
 ** Date: 2016-01-13
-** Description: Main function for CS162_400 Project 1
+** Description: Main function for CS162_400 Project 1 "Conway's Game of Life
 ** Input:
 ** Output:
 *********************************************************************/
 #include <iostream>
-
-//used in windows
-//#include <thread>
-//#include <chrono>
 
 //used on FLIP
 #include <unistd.h>
@@ -22,9 +18,7 @@
 using std::cout;
 using std::cin;
 using std::endl;
-//using std::system("clear");
 
-//using std::this_thread::sleep_for;
 
 int main()
 {
@@ -40,10 +34,6 @@ int main()
 		}
 	}
 
-	//for testing - initialize the array with an oscillating pattern
-	//first fill the array with dead cells
-	//them populate just the cells that are live
-
 	//kill all cells
 	for (int i = 0; i < 60; i++)		//loop through each line
 	{
@@ -53,9 +43,8 @@ int main()
 		}
 	}
 
-	//display entire array
+	//used during testing
 	//displayEntireArray(array);
-
 	//display visible array
 	//cout << "Starting array:" << endl;
 	//cout << endl;
@@ -73,21 +62,20 @@ int main()
 		}
 	}
 
+	//for testing
 	//display arrayTemp
 	//displayEntireArray(arrayTemp);
-
 	//cout << "This is the starting arrayTemp" << endl;
 	//system("pause");
 
 	//user entry number of cycles to run
 	double cycles = 0;
 	int speed = 500;
-	cout << "Please enter the number of cycles to run: " << endl;
+	cout << "Please enter the number of iterations to run: " << endl;
 	cin >> cycles;
 	double startValue = cycles;
 
-	//user input of starting location
-	//check to see that it is within the visible bounds
+	//user input of starting location, validate to within visible grid
 	int row = 0;  //row is the user chosen row of the visible matrix
 	int col = 0;  //col is the user chosen column of the visible matrix
 
@@ -110,7 +98,7 @@ int main()
 	}
 	cout << endl;
 
-	//user entry of initial object to populate the grid
+	//user chioice of the initial object to populate the grid
 	int startObject = 0;
 	while (startObject != 1 && startObject != 2 && startObject !=3)
 	{
@@ -124,7 +112,7 @@ int main()
 		cout << endl;
 	}
 
-	//oscillator test one
+	//first oscillator test
 	//populate cells with a one line four cell wide oscillator
 	// this needs to force them enough inside to show the entire starting pattern
 
@@ -136,7 +124,7 @@ int main()
 	//	}
 	//}
 
-	//two line oscillator
+	//two line oscillator startObject
 	if (startObject == 1)
 	{
 		for (int i = row; i < row + 1; i++)		//do once
@@ -149,11 +137,11 @@ int main()
 		}
 	}
 
-	//figure eight oscillator
+	//figure eight oscillator startObject
 	if (startObject == 2)
 	{
 		//make two squares
-		for (int i = row; i < row + 3; i++)		//three rows
+		for (int i = row; i < row + 3; i++)		//three rows each
 		{
 			for (int j = col; j < col + 3; j++)	//loop through three columns
 			{
@@ -163,7 +151,7 @@ int main()
 		}
 	}
 
-	//glider
+	//glider startObject
 	if (startObject == 3)
 	{
 		array[row + 20][col + 21] = 1; //top row, middle column
@@ -173,70 +161,36 @@ int main()
 		array[row + 22][col + 22] = 1; //bottom row, right column
 	}
 
+
 	//display the initial grid state
-
-//clear screen for windows
-//system("CLS");
-
-//clear screen for FLIP
-//system("clear");
-
 	displayVisibleArray(array);
 
-	//initial delay for windows
+	//first pause for windows
 	//system("pause");
 
-	//delay for FLIP
+	//first pause for FLIP
+	cout << "Iterations remaining: " << cycles << endl;
 	cout << "Press enter to display the next iteration.";
 	cin.get();
 
 	//iterare the game
 	while (cycles != 0, cycles--)
 	{
-		//if (startValue = cycles)  //to display the initial grid state
-		//{
-		//	//clear screen for windows
-		//	//system("CLS");
-
-		//	//clear screen for FLIP
-		//	system("clear");
-
-		//	displayVisibleArray(array);
-
-		//	//initial delay for windows
-		//	//system("pause");
-
-		//	//initial delay for FLIP
-		//	cout << "Press enter to display the next iteration.";
-		//	cin.get();
-		//}
-
 		runGame(array, arrayTemp);
 
 		//display arrayTemp
 		displayVisibleArray(arrayTemp);
 
+		//for testing on windows
 		//system("pause");
 
 		//tranpose arrayTemp to array
 		swapArray(array, arrayTemp);
 
-		//delay for windows
-		// std::this_thread::sleep_for(std::chrono::milliseconds(speed));
-
-		//delay options for FLIP
-		//usleep(speed);
+		//pause for FLIP
+		cout << "Iterations remaining: " << cycles << endl;
 		cout << "Press enter to display the next iteration." << endl;
 		cin.get();
-
-		//clear screen for windows
-		//system("CLS");
-
-		//clear screen for FLIP
-		//system("clear");
-
-		//cout << "This is the processed arrayTemp" << endl;
-		//system("pause");
 	}
 
 	return 0;

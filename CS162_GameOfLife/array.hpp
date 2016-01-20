@@ -1,10 +1,9 @@
 /*********************************************************************
 ** Program Filename: array.hpp
 ** Author: Giovanni Rosati
+** email: rosatig@oregonstate.edu
 ** Date: 2016-01-13
-** Description: Header file for the array class
-** Input: na
-** Output: na
+** Description: Header file for array.cpp
 *********************************************************************/
 
 #ifndef ARRAY_HPP
