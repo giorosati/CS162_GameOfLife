@@ -1,6 +1,7 @@
 /*********************************************************************
 ** Program Filename: array.cpp
 ** Author: Giovanni Rosati
+** email: rosatig@oregonstate.edu
 ** Date: 2016-01-13
 ** Description: array class
 ** Input: na
@@ -104,7 +105,6 @@ void runGame(int(*array)[80], int(*arrayTemp)[80])
 			if (liveCells == 2) arrayTemp[i][j] = array[i][j];
 			if (liveCells == 3) arrayTemp[i][j] = 1;
 			if (liveCells >= 4) arrayTemp[i][j] = 0;
-
 		}
 	}
 }
